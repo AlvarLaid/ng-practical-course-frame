@@ -3,7 +3,7 @@
     <div>
       <h1>{{title}}</h1>
     </div>
-    <div class="mt-button-right ">
+    <div *ngIf='isLoggedIn' class="mt-button-right ">
       <button mat-stroked-button>Logout</button>
     </div>
   </mat-toolbar-row>

@@ -1,2 +1,7 @@
 <router-outlet></router-outlet>
-<app-header [title]="'Much cool'"></app-header>
+<app-header [title]="'Much cool'" [isLoggedIn]="true"></app-header>
+<div class="content">
+  <div class="center-container">
+    <app-auth></app-auth>
+  </div>
+</div>
