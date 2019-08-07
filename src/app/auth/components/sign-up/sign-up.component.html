@@ -1,3 +1,23 @@
-<p>
-  sign-up works!
-</p>
+<div class="signup-container">
+    <form name="'singUpForm'" [formGroup]="signUpForm" (ngSubmit)='onSubmit()'>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput  id="userName" name="userName" formControlName="userName" >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput id="password" name="password" [type]="'password'" formControlName="password">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+          <mat-label>Confirm password</mat-label>
+          <input matInput id="verifyPassword" name="verifyPassword" [type]="'password'" formControlName="verifyPassword">
+        </mat-form-field>
+        <div *ngIf="signUpForm.hasError('passwordsDoNotMatch')">
+            Passwords do not match.
+        </div>
+      <div>
+        <button type='submit' mat-stroked-button [disabled]='!signUpForm.valid'>Login</button>
+      </div>
+    </form>
+  </div>
+
