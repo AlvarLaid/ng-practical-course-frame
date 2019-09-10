@@ -1,8 +1,8 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { EventEmitter } from 'events';
-import { FormBuilder, Validators, FormGroup, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { TodoApiInterceptor } from '../../../mock-api/interceptors/todo-api.interceptor';
+import { UserCredentials } from '../../models/user.model';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +12,8 @@ import { TodoApiInterceptor } from '../../../mock-api/interceptors/todo-api.inte
 })
 export class SignUpComponent implements OnInit {
 
-  @Output() sigUpRequested: EventEmitter = new EventEmitter();
+  @Output() sigUpRequested: EventEmitter = new EventEmitter<UserCredentials>();
+  @Output() showLoginForm: EventEmitter = new EventEmitter();
 
   signUpForm: FormGroup;
 
@@ -44,10 +45,8 @@ export class SignUpComponent implements OnInit {
   onSubmit() {
     if (this.signUpForm.valid) {
       console.log('Form submited.');
-      this.sigUpRequested.emit('');
-      return;
+      this.sigUpRequested.emit({ username:  this.signUpForm.get('userName').value, password: this.signUpForm.get('password').value });
     }
-    console.log('Form invalid');
   }
 
   passwordValidator(form: FormGroup) {
@@ -55,11 +54,14 @@ export class SignUpComponent implements OnInit {
     const passwordMatch = form.get('password').value === form.get('verifyPassword').value;
     if (!passwordMatch) {
       form.get('verifyPassword').setErrors({ passwordsDoNotMatch: true });
-    }
-    else {
-      form.get('verifyPassword').setErrors({ passwordsDoNotMatch: null });
+    } else {
+      form.get('verifyPassword').setErrors(null);
     }
 
     return passwordMatch ? null : { passwordsDoNotMatch: true};
+  }
+
+  showLogin() {
+    this.showLoginForm.emit('');
   }
 }

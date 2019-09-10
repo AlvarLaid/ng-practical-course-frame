@@ -1,8 +1,8 @@
 <div class="login-container">
-  <form #loginForm="ngForm" name="'loginForm'">
+  <form #loginForm="ngForm" name="'loginForm'" (ngSubmit)='onSubmit()'>
     <mat-form-field appearance="outline">
       <mat-label>Username</mat-label>
-      <input matInput  id="userName" name="userName" [(ngModel)]="userName.value" required>
+      <input matInput id="userName" name="userName" [(ngModel)]="userName.value" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
@@ -17,7 +17,9 @@
       </div>
     </div>
     <div>
-      <button mat-stroked-button [disabled]='loginForm.form.pristine || loginForm.form.invalid'>Login</button>
+      <button type='submit' mat-stroked-button [disabled]='loginForm.form.pristine || loginForm.form.invalid'>Login</button>
+      &nbsp;
+      <button mat-stroked-button (click)='showSignUp()'>or sign up</button>
     </div>
   </form>
 </div>

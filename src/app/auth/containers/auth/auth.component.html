@@ -1,6 +1,13 @@
-<app-login></app-login>
-<p>
-    <button mat-stroked-button>Sign up</button>
-</p>
-<app-sign-up></app-sign-up>
+<div *ngIf='showLogin'>
+  <app-login (showSignUpForm)='loginFormToggle()'></app-login>
+  <p>
+    <!-- <button mat-stroked-button (click)='loginFormToggle()'>or sign up</button> -->
+  </p>
+</div>
 
+<div *ngIf='!showLogin'>
+  <p>
+    <!-- <button mat-stroked-button (click)='loginFormToggle()'>or login</button> -->
+  </p>
+  <app-sign-up (showLoginForm)='loginFormToggle()'></app-sign-up>
+</div>

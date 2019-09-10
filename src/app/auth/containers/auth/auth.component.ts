@@ -8,8 +8,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AuthComponent implements OnInit {
 
-  constructor() { }
+  showLogin = true;
+
+  constructor() {
+   }
 
   ngOnInit() { }
+
+  loginFormToggle() {
+    this.showLogin = !this.showLogin;
+  }
 
 }
